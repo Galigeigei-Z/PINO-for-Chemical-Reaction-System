@@ -1,6 +1,8 @@
 # Physics-Informed Neural Operator Framework for Coupled Transport and Reaction Systems
 Overview
 
+<img width="1058" height="940" alt="image" src="https://github.com/user-attachments/assets/fae48990-3212-45d4-96c2-a41d9d64bc2c" />
+
 This project develops a unified Physics-Informed Neural Operator (PINO) framework for modeling coupled transport–reaction systems, integrating the spectral learning efficiency of neural operators with explicit physical constraints derived from governing PDEs.
 
 The framework is designed to serve as a computationally efficient surrogate for both:
