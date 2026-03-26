@@ -1,91 +1,189 @@
 # Physics-Informed Neural Operator Framework for Coupled Transport and Reaction Systems
-Overview
 
-<img width="1058" height="940" alt="image" src="https://github.com/user-attachments/assets/fae48990-3212-45d4-96c2-a41d9d64bc2c" />
+## Overview
 
-This project develops a unified Physics-Informed Neural Operator (PINO) framework for modeling coupled transport–reaction systems, integrating the spectral learning efficiency of neural operators with explicit physical constraints derived from governing PDEs.
+This repository presents a lightweight public demo from my PINO work on coupled transport-reaction systems.
 
-The framework is designed to serve as a computationally efficient surrogate for both:
+The broader goal of this framework is application-oriented: to build a surrogate model that can replace repeated high-cost simulations in reaction engineering while still respecting the governing transport and reaction physics.
 
-forward prediction of spatiotemporal fields, and
+The framework is developed for two closely related tasks:
 
-inverse identification of kinetic and transport parameters,
+- forward prediction of spatiotemporal concentration fields
+- inverse identification of kinetic and transport parameters from limited observations
 
-while maintaining PDE-level predictive fidelity and CFD-comparable inference accuracy at a fraction of the computational cost.
+In this setting, the objective is not only speed, but also physical consistency. By combining operator learning with PDE-based constraints, the framework provides a practical middle ground between purely data-driven surrogates and full CFD-based optimization.
 
+## Availability
 
+This repository currently contains a cleaned public demo and representative figures.
 
-Methodology
+The full research codebase will be made available when the paper is online.
 
-The proposed framework unifies forward and inverse PINO formulations within a consistent operator-learning architecture, enabling stable learning across diffusion-dominated, reaction-limited, and convective–reactive regimes.
+## What This Demo Does
 
-Key features include:
+In this demo I use a reactive channel flow case with advection, diffusion, and reaction to show the full forward-inverse workflow:
 
-Spectral neural operators for efficient global representation
+1. Solve a forward ADR problem for `A + B -> C`
+2. Generate a synthetic reference field
+3. Train the forward surrogate using data loss only
+4. Start the backward stage and identify the kinetic parameter `k` from a single-species reference field `c_A`
+5. Export publication-style figures
 
-Physics-based regularization enforcing conservation laws
+For the GitHub version, I cleaned up the original notebook so that it is easier to run and easier to read:
 
-End-to-end differentiable inverse learning for parameter estimation
+- no cluster-specific `sys.path` edits
+- no absolute local font paths
+- all outputs are written to `github_demo_outputs/`
+- result filenames are consistent across cells
+- notebook outputs were stripped before release
 
-Case Studies and Key Results
-1. Transient Diffusion–Reaction System (Forward PINO)
+## Methodology and Visual Overview
 
-A forward PINO model was trained on sampled concentration data to predict the spatiotemporal evolution of concentration fields over a wide range of Thiele moduli.
+### Framework
 
-<img width="998" height="284" alt="image" src="https://github.com/user-attachments/assets/58ad2a00-22d0-407a-8449-d48fb6b08f4c" />
+<img width="1058" height="940" alt="Framework overview" src="https://github.com/user-attachments/assets/fae48990-3212-45d4-96c2-a41d9d64bc2c" />
 
-Key results:
+### Case Study 1: Transient Diffusion-Reaction System
 
+<img width="998" height="284" alt="Transient diffusion-reaction system" src="https://github.com/user-attachments/assets/58ad2a00-22d0-407a-8449-d48fb6b08f4c" />
 
+### Case Study 3: Reactive Channel Flow
 
-Average prediction deviation below 0.005
+<img width="929" height="232" alt="Reactive channel flow inverse PINO" src="https://github.com/user-attachments/assets/3a77e9e3-2e10-4c6e-8d64-b660a656a09a" />
 
-Testing coefficient of determination R² ≈ 0.997
+## Environment Setup
 
-Performance competitive with analytical benchmarks (HPM)
+### Option 1: pip
 
-Improved stability and accuracy compared to conventional FNO and PINN surrogates under nonlinear kinetics
+Create a clean Python environment and install the minimal dependencies:
 
-2. Porous Catalyst System (Inverse PINO)
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+```
 
-An inverse PINO formulation was applied to a cylindrical porous catalyst, identifying intrinsic Thiele modulus and effective diffusivity using only a single steady-state radial concentration profile.
+### Option 2: conda
 
-Key results:
+```bash
+conda create -n case3-pino-demo python=3.10 -y
+conda activate case3-pino-demo
+pip install -r requirements.txt
+```
 
-Mean parameter deviation of 0.018 from reference values
+### Cluster GPU environment used here
 
-Predicted effectiveness factor within ~0.04 of experimental observations
+If you are running on your cluster with the existing shared environment, the helper scripts in this folder use:
 
-Demonstrated potential for accelerating catalyst design and kinetic parameterization
+```bash
+conda activate /scratch/e1518147/vanda_pypkg/envs/py310
+```
 
-3. Reactive Channel Flow (Inverse PINO with Convection)
+### Expected Core Packages
 
-The framework was extended to a convective–diffusive–reactive channel flow, representing a CFD-level transport–reaction environment.
+- Python 3.10 or newer
+- `numpy`
+- `matplotlib`
+- `torch`
+- `jupyter`
+- `nbconvert`
 
-<img width="929" height="232" alt="image" src="https://github.com/user-attachments/assets/3a77e9e3-2e10-4c6e-8d64-b660a656a09a" />
+### GPU Note
 
+The notebook can run on CPU. If CUDA-enabled PyTorch is available, it will automatically use GPU:
 
-Key results:
+```python
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+```
 
-Reduced kinetic parameter error from >90% to <1% using single-species measurements
+## Repository Contents
 
-Achieved 94–99% reduction in computational time compared to CFD-based adjoint-gradient optimization
+- `model3-paper-demo-github.ipynb`: GitHub-ready notebook
+- `generate_case3_github_demo.py`: script used to generate the cleaned notebook
+- `requirements.txt`: minimal Python dependencies for this demo
+- `model3-paper-demo-github.executed.ipynb`: optional executed notebook artifact
+- `github_demo_outputs/`: generated output figures and pickle files after execution
+- `run_notebook_gpu.sh`: run the notebook on a GPU node using the shared `py310` environment
+- `submit_gpu_job.pbs`: submit the notebook as a PBS GPU job
 
-Maintained consistent physical fidelity across inverse iterations
+## How to Run
 
+### Run interactively
 
+Open the notebook and execute cells from top to bottom:
 
-Significance
+```bash
+jupyter notebook model3-paper-demo-github.ipynb
+```
 
-Collectively, these results demonstrate that the proposed forward–backward PINO framework acts as a physically consistent and computationally efficient surrogate for coupled transport–reaction systems.
+or
 
-By bridging data-driven learning and first-principles modeling, the framework offers a scalable and generalizable tool for:
+```bash
+jupyter lab model3-paper-demo-github.ipynb
+```
 
-Reactor modeling
+### Run from command line
 
-Catalyst characterization
+```bash
+python3 -m nbconvert --to notebook --execute model3-paper-demo-github.ipynb --output model3-paper-demo-github.executed.ipynb --ExecutePreprocessor.timeout=0
+```
 
-Inverse kinetic identification
+### Run on the cluster GPU node with the shared `py310` environment
 
-Process optimization in chemical reaction engineering
+After entering a GPU node, run:
 
+```bash
+bash ./run_notebook_gpu.sh
+```
+
+Or submit directly with PBS:
+
+```bash
+qsub ./submit_gpu_job.pbs
+```
+
+All generated files will be written to:
+
+- `github_demo_outputs/`
+
+## Expected Outputs
+
+After a successful run, you should expect files such as:
+
+- `github_demo_outputs/adr_channel_demo.pkl`
+- `github_demo_outputs/adr_channel_demo.svg`
+- `github_demo_outputs/adr_pino_result_k_only_demo.pkl`
+- `github_demo_outputs/field_comparison_demo.svg`
+- `github_demo_outputs/triple_panel_identification_demo.svg`
+
+## Upstream Foundations
+
+This is not a from-scratch implementation. It is my cleaned and adapted demo built on the broader Fourier Neural Operator / Physics-Informed Neural Operator line of work.
+
+Relevant upstream repositories:
+
+- Fourier Neural Operator: <https://github.com/neuraloperator/neuraloperator>
+- Physics-Informed Neural Operator: <https://github.com/neuraloperator/physics_informed>
+
+If you use or redistribute this demo, please cite the relevant FNO/PINO papers and repositories, and make clear that this repository is an adapted downstream demo built on that foundation.
+
+## Research Context
+
+This demo sits inside a broader PINO framework that I use for coupled transport-reaction systems. In the larger study, the framework is used for:
+
+- forward prediction of spatiotemporal fields
+- inverse identification of kinetic and transport parameters
+- reactor modeling
+- catalyst characterization
+- process optimization in chemical reaction engineering
+
+Some representative results from the broader workflow are:
+
+- `R² ≈ 0.997` for a transient diffusion-reaction forward case
+- mean parameter deviation around `0.018` for a porous catalyst inverse case
+- `94–99%` reduction in computational time versus CFD-based adjoint-gradient optimization for the reactive channel inverse case
+
+## Scope Note
+
+This folder is meant to be a lightweight, reproducible public demo. It is not a full archival release of every private experiment in the original working directory.
