@@ -15,7 +15,7 @@ In this setting, the objective is not only speed, but also physical consistency.
 
 ## Availability
 
-This repository currently contains a cleaned public demo and representative figures.
+This repository currently contains a demo and representative figures.
 
 The full research codebase will be made available when the paper is online.
 
