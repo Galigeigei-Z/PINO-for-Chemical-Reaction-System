@@ -54,6 +54,7 @@ Main file:
 Main files:
 
 - `case3/case3_demo.ipynb`
+- `case3/case3_demo.executed.ipynb`
 - `case3/github_demo_outputs/adr_channel_demo.pkl`
 - `case3/github_demo_outputs/forward_surrogate_state_dict_demo.pt`
 
@@ -77,6 +78,30 @@ Relevant upstream repositories:
 
 - Fourier Neural Operator: <https://github.com/neuraloperator/neuraloperator>
 - Physics-Informed Neural Operator: <https://github.com/neuraloperator/physics_informed>
+
+## Citation
+
+If this repository is useful for your work, please consider citing this paper:
+
+```bibtex
+@article{doi:10.1021/acs.iecr.5c04659,
+author = {Zhang, Ziyun and Lim, Eldin Wee Chuan},
+title = {Physics-Informed Neural Operator Framework for Coupled Transport and Reaction Systems},
+journal = {Industrial & Engineering Chemistry Research},
+volume = {0},
+number = {0},
+pages = {null},
+year = {0},
+doi = {10.1021/acs.iecr.5c04659},
+
+URL = {
+    https://doi.org/10.1021/acs.iecr.5c04659
+},
+eprint = {
+    https://doi.org/10.1021/acs.iecr.5c04659
+}
+}
+```
 
 ## Contact
 
