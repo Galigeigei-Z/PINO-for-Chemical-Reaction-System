@@ -104,4 +104,4 @@ BibTeX:
 
 ## Contact
 
-Feel free to contact me: ziyun_zhang@u.nus.edu
+Questions, feedback, or collaboration ideas are welcome. Feel free to contact me: `ziyun_zhang@u.nus.edu`
