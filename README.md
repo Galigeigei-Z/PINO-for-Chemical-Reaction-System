@@ -104,4 +104,4 @@ BibTeX:
 
 ## Contact
 
-Questions, feedback, or collaboration ideas are welcome. Feel free to contact me: `"Ziyoon_Zhang@outlook.com" <ziyoon_zhang@outlook.com>`
+Questions, feedback, or collaboration ideas are welcome. Feel free to contact me: "Ziyoon_Zhang@outlook.com"
