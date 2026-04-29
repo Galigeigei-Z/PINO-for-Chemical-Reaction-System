@@ -81,25 +81,13 @@ Relevant upstream repositories:
 
 ## Citation
 
-If this repository is useful for your work, please consider citing this paper:
+If this repository is useful for your work, please consider citing our pub:
 
-```bibtex
-Zhang, Z.; Lim, E. W. C. Physics-Informed Neural Operator Framework for Coupled Transport and Reaction Systems.
-Industrial & Engineering Chemistry Research, published online April 13, 2026.
-https://doi.org/10.1021/acs.iecr.5c04659
 ```
-
-BibTeX:
-
-```bibtex
-@article{zhang2026pino,
-  author = {Zhang, Ziyun and Lim, Eldin Wee Chuan},
-  title = {Physics-Informed Neural Operator Framework for Coupled Transport and Reaction Systems},
-  journal = {Industrial \\& Engineering Chemistry Research},
-  year = {2026},
-  doi = {10.1021/acs.iecr.5c04659},
-  url = {https://doi.org/10.1021/acs.iecr.5c04659}
-}
+Physics-Informed Neural Operator Framework for Coupled Transport and Reaction Systems
+Ziyun Zhang and Eldin Wee Chuan Lim
+Industrial & Engineering Chemistry Research 2026 65 (16), 8389-8402
+https://doi.org/10.1021/acs.iecr.5c04659
 ```
 
 ## Contact
