@@ -1,4 +1,4 @@
-# PINO for Chemical Reaction System
+# Physics-Informed Neural Operator Framework for Coupled Transport and Reaction Systems
 
 ## Overview
 
