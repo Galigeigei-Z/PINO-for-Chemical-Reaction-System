@@ -91,4 +91,4 @@ https://doi.org/10.1021/acs.iecr.5c04659
 
 ## Contact
 
-Questions, feedback, or collaboration ideas are welcome. Feel free to contact me: "Ziyoon_Zhang@outlook.com"
+Questions, feedback, or collaboration ideas are welcome. Feel free to contact me: "Ziyun_Zhang@u.nus.edu/Ziyoon_Zhang@outlook.com"
